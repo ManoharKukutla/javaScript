@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        Calculator
+    </title>
+    <style>
+        body {
+            background: #e5e5e5;
+            user-select: none;
+
+        }
+
+        .container {
+            display: block;
+            padding: 20px;
+            width: 300px;
+            background: #14213d;
+            text-align: center;
+            margin: 50px auto 0;
+            border: none;
+            border-radius: 30px;
+            box-shadow: 0px 0px 0px 12px #e5e5e5, 0px 0px 10px 10px #14213d;
+
+        }
+
+        #search-el {
+            width: 280px;
+            height: 80px;
+            margin-bottom: 15px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 15px;
+            background: #ffd100;
+            box-shadow: 0px 0px 3px 0px black;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            font-size: 30px;
+            text-align: end;
+            color: black;
+            outline: none;
+
+
+
+        }
+
+        button {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto;
+            border: none;
+            border-radius: 15px;
+            background: black;
+            color: white;
+            box-shadow: 0px 0px 0px 0.8px #e5e5e5, 0px 0px 4px 0px black;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            font-size: 30px;
+            cursor: pointer;
+
+        }
+
+        button:hover {
+            background: white;
+            color: black;
+            box-shadow: 0px 0px 0px 0.8px #e5e5e5, 0px 0px 4px 0px black;
+
+        }
+
+
+
+        .btn-el {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-row-gap: 15px;
+            margin-bottom: 20px;
+
+
+
+        }
+
+        #zero {
+            grid-column: span 2;
+            width: 135px;
+
+
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <input type="text" name="" id="search-el">
+        <div class="btn-el">
+            <button>%</button>
+            <button>/</button>
+            <button>*</button>
+            <button>-</button>
+            <button>7</button>
+            <button>8</button>
+            <button>9</button>
+            <button>+</button>
+            <button>4</button>
+            <button>5</button>
+            <button>6</button>
+            <button id="calc-el">=</button>
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+            <button id="clear-el">C</button>
+            <button id="zero">0</button>
+            <button>.</button>
+            <button id="clearAll-el">AC</button>
+        </div>
+    </div>
+    <script>
+
+        const searchEl = document.getElementById("search-el")
+
+        const allButtons = document.querySelectorAll(".btn-el button")
+
+        allButtons.forEach(button => {
+            button.addEventListener("click", () => {
+                const buttonText = button.textContent
+
+
+                if (buttonText === "=") {
+                    try {
+                        searchEl.value = eval(searchEl.value)
+                    } catch {
+                        searchEl.value = "Error"
+
+                    }
+                } else if (buttonText === "C") {
+                    searchEl.value = searchEl.value.slice(0, -1)
+                } else if (buttonText === "AC") {
+                    searchEl.value = ""
+                } else {
+                    searchEl.value += buttonText
+                }
+
+            })
+        })
+
+
+
+
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>
