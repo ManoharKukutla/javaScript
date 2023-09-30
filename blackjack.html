@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Black jack</title>
+    <style>
+        body {
+            text-align: center;
+            margin-top: 80px;
+            background-color: black;
+        }
+
+        div {
+            display: block;
+            border: none;
+            border-radius: 30px;
+            background: rgb(255, 0, 98);
+            color: white;
+            margin-left: auto;
+            margin-right: auto;
+            width: 450px;
+            height: 450px;
+            padding-top: 30px;
+            padding-bottom: 80px;
+
+
+
+        }
+
+        h3 {
+            font-family: monospace;
+            font-size: 60px;
+            text-shadow: 0px 0px 8px black;
+
+        }
+
+        p {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: bold;
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+
+        button {
+            border: none;
+            border-radius: 30px;
+            padding: 10px 15px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: bold;
+            background-color: yellow;
+            margin-bottom: 20px;
+            margin-left: 10px;
+            margin-right: 10px;
+
+        }
+
+        #text-bj {
+            color: yellow;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <h3>Black Jack</h3>
+        <p id="text-bj">Want to play a round?</p>
+        <p id="card-bj">Cards:</p>
+        <p id="sum-bj">Sum:</p>
+        <Button onclick="startGame()">Start Game</Button>
+        <Button onclick="newGame()">New Card</Button>
+        <p id="price-bj"></p>
+    </div>
+    <script>
+        let player = {
+            name: "Manu",
+            chips: 200
+        }
+
+        let textBj = document.getElementById("text-bj")
+        let cardBj = document.getElementById("card-bj")
+        let sumBj = document.getElementById("sum-bj")
+        let priceBj = document.getElementById("price-bj")
+        let cards = []
+        let sum = 0
+        let isAlive = false
+        let hasBlackJack = false
+        let message = " "
+        priceBj.textContent = player.name + ": $" + player.chips
+
+
+        function getRandomCard() {
+            randomNumber = Math.floor(Math.random() * 13) + 1
+            if (randomNumber > 10) {
+                return 10
+            } else if (randomNumber === 1) {
+                return 11
+            } else {
+                return randomNumber
+            }
+        }
+
+        function startGame() {
+            isAlive = true
+            firstCard = getRandomCard()
+            secondCard = getRandomCard()
+            cards = [firstCard, secondCard]
+            sum = firstCard + secondCard
+
+            renderGame()
+        }
+
+        function renderGame() {
+            cardBj.textContent = "cards: "
+            for (i = 0; i < cards.length; i++) {
+                cardBj.textContent += cards[i] + " "
+            }
+            sumBj.textContent = "Sum: " + sum
+            if (sum <= 20) {
+                message = "Do you want to draw a new card?"
+            } else if (sum === 21) {
+                message = "You've got Blackjack!"
+                hasBlackJack = true
+            } else {
+                message = "You're out of the game!"
+                isAlive = false
+            }
+            textBj.textContent = message
+        }
+
+        function newGame() {
+            if (isAlive === true && hasBlackJack === false) {
+                let newCard = getRandomCard()
+                cards.push(newCard)
+                sum += newCard
+                renderGame()
+
+            }
+
+        }
+    </script>
+</body>
+
+</html>
